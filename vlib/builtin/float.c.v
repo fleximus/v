@@ -10,6 +10,8 @@ $if !native {
 	#include <float.h>
 }
 
+$if !nofloat ? {
+
 // str returns a string representation of the given `f64` in a suitable notation.
 @[inline]
 pub fn (x f64) str() string {
@@ -130,6 +132,58 @@ pub fn (x f32) strsci(digit_num int) string {
 pub fn (x f32) strlong() string {
 	return strconv.f32_to_str_l(x)
 }
+
+} // end $if !nofloat
+
+$if nofloat ? {
+
+// Stub implementations for freestanding/nofloat mode
+@[inline]
+pub fn (x f64) str() string {
+	return ''
+}
+
+@[inline]
+pub fn (x f64) strg() string {
+	return ''
+}
+
+@[inline]
+pub fn (x f64) strsci(digit_num int) string {
+	return ''
+}
+
+@[inline]
+pub fn (x f64) strlong() string {
+	return ''
+}
+
+@[inline]
+pub fn (d float_literal) str() string {
+	return ''
+}
+
+@[inline]
+pub fn (x f32) str() string {
+	return ''
+}
+
+@[inline]
+pub fn (x f32) strg() string {
+	return ''
+}
+
+@[inline]
+pub fn (x f32) strsci(digit_num int) string {
+	return ''
+}
+
+@[inline]
+pub fn (x f32) strlong() string {
+	return ''
+}
+
+} // end $if nofloat
 
 // f32_abs returns the absolute value of `a` as a `f32` value.
 // Example: assert f32_abs(-2.0) == 2.0
